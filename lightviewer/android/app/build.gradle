@@ -1,0 +1,66 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.csefiveb"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.csefiveb"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("cse5b.jks")  // Replace with the correct path to your keystore file
+            storePassword "Nu S@4047#"  // Enter your keystore password here
+            keyAlias "lightviewer"                  // This should match the alias you used when generating the keystore
+            keyPassword "Nu S@4047#"         // Enter your key password here
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release  // Use the signing config for release build
+            shrinkResources false
+            minifyEnabled false
+            // If you later enable minification, you'll need to configure ProGuard rules.
+        }
+    }
+    
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+// Add the required dependencies
+dependencies {
+
+    // Error-prone annotations
+    implementation 'com.google.errorprone:error_prone_annotations:2.14.0'
+
+    // javax.annotation for nullable/guardedBy
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+}
